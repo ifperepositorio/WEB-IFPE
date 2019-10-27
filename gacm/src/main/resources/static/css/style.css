@@ -1,0 +1,25 @@
+.msg{
+	margin-top: 10px;
+	height: 50px;
+}
+
+.topo-nav{
+	margin-top: 20px;
+	margin-bottom: 20px;
+	background-color: #0984e3;
+	
+}
+
+.nav-principal{
+	background-color: #0984e3;
+}
+.topo-nav p{
+	color: white;
+	margin-top: 10px;
+	font-size: 25px;
+	line-height: 15px;
+}
+
+.novo{
+	background-color: #dfe6e9;
+}
