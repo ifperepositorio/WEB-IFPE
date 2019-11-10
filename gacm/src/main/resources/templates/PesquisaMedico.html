@@ -33,11 +33,12 @@
   <tbody>
   
     <tr th:each="med : ${medicos}">
-          <td scope="col" th:text="${med.id}"></td>
+          <td scope="col" th:text="${med.id}">1</td>
           <td scope="col" th:text="${med.nome}"></td>
           <td scope="col" th:text="${med.crm}"></td>
           <td scope="col" th:text="${med.especialidade.descricao}"></td>
-          <td></td>  
+          
+           <td><a th:href="@{/medicos/{id}(id=${med.id})}">Edit</a></td>         
     </tr>    
   
     <tr>

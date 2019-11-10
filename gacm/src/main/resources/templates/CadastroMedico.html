@@ -11,54 +11,50 @@
 
 
  <section layout:fragment="conteudo">
-<!-- Image and text -->
+
 <nav class="navbar topo-nav">  
     <p>Cadastro de Medicos</p>  
      <a class="btn btn-outline-dark my-2 my-sm-0 novo" th:href="@{/medicos/}">Pesquisar</a>  
-</nav>
-
-    
-
-
-	<form method="POST" action="/medicos">
+</nav>  
 	
-	  <div class="alert alert-success alert-dismissible fade show msg" th:if="${!#strings.isEmpty(mensagem)}">      
-	      <span th:text="${mensagem}">Médico cadastrado com sucesso!</span>
-	  </div>
 	
-		<div class="card">
+		<form action="#" th:action="@{/adduserMedico}" th:object="${medico}" method="post">
+			  <div class="alert alert-success" th:if="${!#strings.isEmpty(mensagem)}">
+			      <span th:text="${mensagem}">Médico salvo com sucesso!!!</span>
+		      </div>
+      
+      <div class="card">
 		    <div class="card-body">
-				<div class="form-group">
-					<label for="nome" class="col-sm-2 col-form-label">Nome</label>
-					<div class="col-sm-4"> 
-						<input type="text" class="form-control" id="nome" name="nome"/>
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="crm" class="col-sm-2 col-form-label">CRM</label>
-					<div class="col-sm-2">   
-						<input type="text" class="form-control" id="crm" name="crm"/>
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="especialidade" class="col-sm-2 col-form-label">Especialidade</label>
-					<div class="col-sm-2">   
-						<select class="form-control" name="especialidade">
-						   <option>Selecione</option>
-						   <option th:each="esp : ${especialidade}" th:value="${esp}"
-						   th:text="${esp.descricao}"></option>						   
-						</select>
-					</div>
-				</div>				
-				
-				<div class="form-group">
+			<div class="form-group">			
+	             <label for="nome" class="col-sm-2 col-form-label">Nome</label>	
+	              <input type="text" th:field="*{nome}" id="nome" placeholder="Nome">
+	              <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+	              			
+	         </div>
+	         
+	         <div class="form-group">			
+	             <label for="crm" class="col-sm-2 col-form-label">CRM</label>	
+	              <input type="text" th:field="*{crm}" id="crm" placeholder="CRM">
+	              <span th:if="${#fields.hasErrors('crm')}" th:errors="*{crm}"></span>			
+	         </div>
+	         
+	          <div class="form-group">			
+	             <label for="especialidade" class="col-sm-2 col-form-label">Especialidade</label>	
+	              <input type="text" th:field="*{especialidade}" id="especialidade" placeholder="especialidade">
+	              <span th:if="${#fields.hasErrors('especialidade')}" th:errors="*{especialidade}"></span>			
+	         </div>
+	         
+	         <div class="form-group">
 					<div class="col-sm-offset-2 col-sm-10">
 						<button type="submit" class="btn btn-primary">Salvar</button>
 					</div>
-				</div>
-			</div>
-		</div>
-	</form>
+				</div>	          
+	    </div>
+	  </div>
+</form>	   
+
+	
+		
  
 </section>
 

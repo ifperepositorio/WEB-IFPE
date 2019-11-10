@@ -1,4 +1,4 @@
-package com.ifpe.gacm.model;
+package com.ifpe.ClinicaGeral.model;
 
 import java.io.Serializable;
 
@@ -15,6 +15,6 @@ public abstract class AbstractIds implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long codigo;
+	private Long id;
 
 }

@@ -1,55 +1,70 @@
 package com.ifpe.gacm.controller;
 
-import java.util.Arrays;
-import java.util.List;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
-import com.ifpe.gacm.model.Especialidades;
-import com.ifpe.gacm.model.Medicos;
+import com.ifpe.gacm.model.Medico;
 import com.ifpe.gacm.repository.MedicoRepository;
 
 @Controller
-@RequestMapping("/medicos")
 public class MedicoController {
-	
+			
 	@Autowired
 	private MedicoRepository medicoRepository;
 
-	@RequestMapping("/novo")
-	public ModelAndView home() {
-		ModelAndView mv = new ModelAndView("CadastroMedico");		
-		return mv;
-	}
+	@GetMapping("/cadastrar") //singup
+    public String home(Medico medico) {
+       return "CadastroMedico";
+}	
 	
-	@RequestMapping(method = RequestMethod.POST)	
-	public ModelAndView salvar(Medicos medicos) {
-		medicoRepository.save(medicos);
-		ModelAndView mv = new ModelAndView("CadastroMedico");
-		mv.addObject("mensagem", "Médico salvo com sucesso!");
-		return mv;
-	}
+	@PostMapping("/adduserMedico") //adduser
+    public String addUser(@Valid Medico medico, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            return "adduserMedico";
+        }
+         
+        medicoRepository.save(medico);
+        model.addAttribute("users", medicoRepository.findAll());
+        return "PesquisaMedico";
+    }	
 	
-	@RequestMapping
-	public ModelAndView listar() {
-		List<Medicos> todosMedicos = medicoRepository.findAll();
-		ModelAndView mv = new ModelAndView("PesquisaMedico");
-		mv.addObject("medicos", todosMedicos);
-		return mv;
-	}
+	@GetMapping("/edit/{id}")
+    public String showUpdateForm(@PathVariable("id") long id, Model model) {
+        Medico medico = medicoRepository.findById(id)
+          .orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
+         
+        model.addAttribute("medico", medico);
+        return "adduserMedico";
+    }
 	
-	@ModelAttribute("especialidade")
-	public List<Especialidades> especialidade(){
-		return Arrays.asList(Especialidades.values());
-	}
-	
-	
-	
+	@PostMapping("/update/{id}")
+    public String updateUser(@PathVariable("id") long id, @Valid Medico medico, 
+      BindingResult result, Model model) {
+        if (result.hasErrors()) {
+        	medico.setId(id);
+            return "update-user";
+        }
+             
+        medicoRepository.save(medico);
+        model.addAttribute("users", medicoRepository.findAll());
+        return "index";
+    }
+         
+    @GetMapping("/delete/{id}")
+    public String deleteUser(@PathVariable("id") long id, Model model) {
+        Medico medico = medicoRepository.findById(id)
+          .orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
+        medicoRepository.delete(medico);
+        model.addAttribute("users", medicoRepository.findAll());
+        return "index";
+    }
 	
 	
 }
