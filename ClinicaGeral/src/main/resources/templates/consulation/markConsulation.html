@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html
+       xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:th="http://www.thymeleaf.org"
+       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+       layout:decorator="layout/standardLayout">
+<head></head>
+<body>
+
+<div layout:fragment="content">
+
+<div class="container">  
+
+ <th:block th:include="fragments/successMessage"></th:block>
+  
+  <form method="post" th:object="${medicalConsultation}"> 
+  
+  <th:block th:include="fragments/ErrorValidateMessage"></th:block>
+  
+     <div class="form-group col-md-6" th:classappend="${#fields.hasErrors('dateConsulation')} ? has-warning">
+       <label for="dateConsulation" class="control-label">Data do Atendimento</label>
+       <input type="text" class="form-control" id="dateConsulation" th:field="*{dateConsulation}" placeholder="Informe a data">
+    </div>
+    
+    <div class="form-group col-md-6" th:classappend="${#fields.hasErrors('telephone')} ? has-warning">
+       <label for="telephone" class="control-label">Telefone para contato</label>
+       <input type="number" class="form-control" id="telephone" th:field="*{telephone}" placeholder="Informe o telefone">
+    </div>
+    
+     <div class="form-group col-md-4">
+          <label for="patient">Escolha o paciente</label>
+	      <div class="field-action">
+			      <select id="patient"  class="form-control" th:field="*{patient}">
+			        <option value="" selected>Selecione...</option>
+			        <option th:each="patient : ${patients}" th:value="${patient.id}" th:text="${patient.name}"></option>
+			      </select>		        
+		      
+	      </div>
+    </div> 
+    
+    <div class="form-group col-md-4">
+      <label for="doctor">Escolha o médico</label>
+	      <div class="field-action">
+		      <select id="doctor"  class="form-control" th:field="*{doctor}">
+		        <option value="" selected>Selecione...</option>
+		        <option th:each="doctor : ${doctors}" th:value="${doctor.id}" th:text="${doctor.name}"></option>
+		      </select>			        
+		      
+	      </div>
+    </div>  
+    
+        
+    <div class="form-group col-md-4">
+      <label for="hour">Horários diponiveis para Atendimento</label>
+	      <div class="field-action">
+		      <select id="hour"  class="form-control" th:field="*{hour}">
+		        <option value="" selected>Selecione...</option>
+		        <option th:each="hour : ${hours}" th:value="${hour.id}" th:text="${hour.horaMinuto}"></option>
+		      </select>	      
+		        
+		      
+	      </div>
+    </div>          
+     <button type="submit" class="btn btn-primary">Salvar</button>
+</form>
+</div>
+</div>

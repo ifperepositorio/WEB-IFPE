@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html
+       xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:th="http://www.thymeleaf.org"
+       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+       layout:decorator="layout/standardLayout">
+<head></head>
+<body>
+
+<div layout:fragment="content">
+
+<div class="container">  
+
+ <th:block th:include="fragments/successMessage"></th:block>
+  
+  <form method="post" th:object="${especialty}"> 
+  
+     <th:block th:include="fragments/ErrorValidateMessage"></th:block>
+     
+    <div class="form-group col-md-6" th:classappend="${#fields.hasErrors('name')} ? has-warning">
+       <label for="name" class="control-label">Especialidade</label>
+    <input type="text" class="form-control" id="name" th:field="*{name}" placeholder="Informe sua especialidade">
+    </div>
+        
+       
+      
+  <button type="submit" class="btn btn-primary">Salvar</button>
+</form>
+  
+  
+</div>	
+ <div th:replace="especialty/registerEspecialty"></div>			
+</div>	
+
+</body>
+</html>
