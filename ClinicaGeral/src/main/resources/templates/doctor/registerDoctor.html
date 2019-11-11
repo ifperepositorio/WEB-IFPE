@@ -21,16 +21,29 @@
        <label for="name" class="control-label">Nome</label>
     <input type="text" class="form-control" id="name" th:field="*{name}" placeholder="Informe seu nome">
     </div>
+        
     
     <div class="form-group col-md-6">
-       <label for="email">Email</label>
-      <input type="email" class="form-control" id="email" th:field="*{email}" placeholder="Informe seu email">
-    </div>
-    
-      <div class="form-group col-md-6">
        <label for="crm">CRM</label>
        <input type="number" class="form-control" id="crm" th:field="*{crm}" placeholder="Informe seu crm">
     </div>
+    
+     <div class="form-group col-md-4">
+      <label for="hour">Horário de Atendimento</label>
+	      <div class="field-action">
+		      <select id="hour"  class="form-control" th:field="*{hour}">
+		        <option value="" selected>Selecione...</option>
+		        <option th:each="hour : ${hours}" th:value="${hour.id}" th:text="${hour.horaMinuto}"></option>
+		      </select>		      
+		      
+		        <a href="#" data-toggle="modal" data-target="#myModal">
+		            <button type="button" class="btn btn-link">
+	                  Adicionar <span class="glyphicon glyphicon-plus"></span>
+	                </button>		          
+		        </a>
+		      
+	      </div>
+    </div>     
     
      <div class="form-group col-md-4">
       <label for="especialty">Especialidade</label>

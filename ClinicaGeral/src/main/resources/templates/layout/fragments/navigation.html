@@ -11,7 +11,7 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Início <span class="sr-only">(current)</span></a>
+        <a class="nav-link" th:href="@{/}">Início <span class="sr-only">(current)</span></a>
       </li>
      
       <li class="nav-item dropdown">
@@ -19,15 +19,27 @@
           Médicos
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item nav-bg" href="#">Cadastro de médicos</a>          
-        </div>
+          <a class="dropdown-item nav-bg" th:href="@{/medicos/novo}">Cadastro de médicos</a>   
+           <a class="dropdown-item nav-bg" th:href="@{/especialidades/novo}">Cadastro de Especialidades</a>         
+        </div>    
+        
+        
       </li>  
        <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Paciente
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item nav-bg" href="#">Cadastro de paciente</a>          
+          <a class="dropdown-item nav-bg" th:href="@{/pacientes/novo}">Cadastro de paciente</a>          
+        </div>
+      </li>  
+      
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Marcar Consulta
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item nav-bg" th:href="@{/consultas/novo}">Marcação</a>          
         </div>
       </li>     
     </ul>    

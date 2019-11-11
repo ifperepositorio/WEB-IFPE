@@ -13,6 +13,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ifpe.ClinicaGeral.model.Doctor;
 import com.ifpe.ClinicaGeral.repository.Especialtys;
+import com.ifpe.ClinicaGeral.repository.Hour;
 import com.ifpe.ClinicaGeral.service.RegisterDoctorService;
 
 @Controller
@@ -22,12 +23,16 @@ public class DoctorController {
 	private Especialtys especialty;
 	
 	@Autowired
+	private Hour hours;
+	
+	@Autowired
 	private RegisterDoctorService doctorService;
 	
 	@RequestMapping("/medicos/novo")
 	public ModelAndView novo(Doctor doctor) {
 		ModelAndView mv = new ModelAndView("doctor/registerDoctor");
 		mv.addObject("especialtys", especialty.findAll());
+		mv.addObject("hours", hours.findAll());
 		return mv;
 	}
 
