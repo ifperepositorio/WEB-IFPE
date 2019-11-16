@@ -17,19 +17,19 @@
   
      <th:block th:include="fragments/ErrorValidateMessage"></th:block>
      
-    <div class="form-group col-md-6" th:classappend="${#fields.hasErrors('name')} ? has-warning">
+    <div class="form-group col-md-6" th:classappend="${#fields.hasErrors('name')} ? is-invalid">
        <label for="name" class="control-label">Nome</label>
     <input type="text" class="form-control" id="name" th:field="*{name}" placeholder="Informe seu nome">
     </div>
         
     
-    <div class="form-group col-md-6">
-       <label for="crm">CRM</label>
+    <div class="form-group col-md-6" th:classappend="${#fields.hasErrors('crm')} ? is-invalid">
+       <label for="crm" class="control-label">CRM</label>
        <input type="number" class="form-control" id="crm" th:field="*{crm}" placeholder="Informe seu crm">
     </div>
     
-     <div class="form-group col-md-4">
-      <label for="hour">Horário de Atendimento</label>
+     <div class="form-group col-md-4" th:classappend="${#fields.hasErrors('hour')} ? is-invalid">
+      <label for="hour" class="control-label">Horário de Atendimento</label>
 	      <div class="field-action">
 		      <select id="hour"  class="form-control" th:field="*{hour}">
 		        <option value="" selected>Selecione...</option>
@@ -45,7 +45,7 @@
 	      </div>
     </div>     
     
-     <div class="form-group col-md-4">
+     <div class="form-group col-md-4" th:classappend="${#fields.hasErrors('especialty')} ? is-invalid">
       <label for="especialty">Especialidade</label>
 	      <div class="field-action">
 		      <select id="especialty"  class="form-control" th:field="*{especialty}">

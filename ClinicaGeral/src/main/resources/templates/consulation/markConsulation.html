@@ -17,12 +17,12 @@
   
   <th:block th:include="fragments/ErrorValidateMessage"></th:block>
   
-     <div class="form-group col-md-6" th:classappend="${#fields.hasErrors('dateConsulation')} ? has-warning">
+     <div class="form-group col-md-6" th:classappend="${#fields.hasErrors('dateConsulation')} ? is-invalid">
        <label for="dateConsulation" class="control-label">Data do Atendimento</label>
        <input type="text" class="form-control" id="dateConsulation" th:field="*{dateConsulation}" placeholder="Informe a data">
     </div>
     
-    <div class="form-group col-md-6" th:classappend="${#fields.hasErrors('telephone')} ? has-warning">
+    <div class="form-group col-md-6" th:classappend="${#fields.hasErrors('telephone')} ? is-invalid">
        <label for="telephone" class="control-label">Telefone para contato</label>
        <input type="number" class="form-control" id="telephone" th:field="*{telephone}" placeholder="Informe o telefone">
     </div>

@@ -15,6 +15,7 @@ import com.ifpe.ClinicaGeral.model.Doctor;
 import com.ifpe.ClinicaGeral.repository.Especialtys;
 import com.ifpe.ClinicaGeral.repository.Hour;
 import com.ifpe.ClinicaGeral.service.RegisterDoctorService;
+import com.ifpe.ClinicaGeral.service.exception.CrmIsRegisterException;
 
 @Controller
 public class DoctorController {
@@ -43,10 +44,14 @@ public class DoctorController {
 			return novo(doctor);
 		}
 		
-		doctorService.save(doctor);
+		try {
+			doctorService.save(doctor);
+		} catch (CrmIsRegisterException e) {
+		  result.rejectValue("crm", e.getMessage(), e.getMessage());
+		  return novo(doctor);
+		}	
+		
 		redirectAttributes.addFlashAttribute("message", "Registro salvo com sucesso");
-		
-		
 		return new ModelAndView("redirect:/medicos/novo");
 	}
 	

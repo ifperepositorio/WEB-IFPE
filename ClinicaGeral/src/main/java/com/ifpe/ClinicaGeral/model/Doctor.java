@@ -34,7 +34,7 @@ public class Doctor extends AbstractIds {
 	@JoinColumn(name = "codigo_especialty")
 	private Especialty especialty;
 	
-	@NotNull(message = "informe uma especialidade")
+	@NotNull(message = "informe um horário")
 	@ManyToOne
 	@JoinColumn(name = "codigo_hours")
 	private Hours hour;
